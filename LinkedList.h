@@ -26,7 +26,7 @@
 struct Node {
     int data;              // Data stored in the node
     struct Node* next;     // Pointer to the next node in the list
-};
+} typedef Node;
 
 /*
  * Function: createNode
@@ -49,14 +49,18 @@ static struct Node* createNode(int data)
     // Hint: Use 'malloc(sizeof(struct Node))'.
     // Your Code Here
 
+    Node* new_node = (Node*) malloc(sizeof(struct Node));
+
     // Step 2: Check if memory allocation was successful. Return NULL if it failed.
     // Hint: Check if newNode is NULL.
     // Your Code Here
-
+    if (new_node == NULL){
+        return NULL;
+    }
     // Step 3: Initialize the node with data and set 'next' to NULL.
     // Hint: newNode->data = data; newNode->next = NULL;
     // Your Code Here
-
+    
     // Return the new node.
     // Your Code Here
 
