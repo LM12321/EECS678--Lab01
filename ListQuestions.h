@@ -23,6 +23,7 @@
 static bool hasCycle(struct Node *head)
 {
 	//Placeholder return statement
+	
 	return false;
 }
 
