@@ -144,14 +144,14 @@ static void printList(struct Node* head)
     // Hint: If head is NULL, print "The list is empty."
     // Your Code Here
     if (head == NULL){
-        puts("The list is empty");
+        printf("The list is empty\n");
     }
     // Step 2: Traverse the list starting from the head.
     // Hint: Use a while loop; continue until the current node is NULL.
     // Your Code Here
     Node* cur_node = head;
     while (cur_node != NULL){
-        printf("%d->",head->data);
+        printf("%d->",cur_node->data);
         cur_node = cur_node->next;
     }
     putchar('\n');

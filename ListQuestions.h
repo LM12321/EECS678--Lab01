@@ -1,6 +1,8 @@
 #ifndef LIST_QUESTIONS_H
 #define LIST_QUESTIONS_H
 
+//#define DEBUG
+
 #include "LinkedList.h"
 #include <stdbool.h>
 /*
@@ -22,8 +24,18 @@
 
 static bool hasCycle(struct Node *head)
 {
-	//Placeholder return statement
-	
+	if (head == NULL){
+		return false;
+	}
+
+	Node* pos = head;
+	Node* cur_node = head->next;
+	while (cur_node != NULL){
+		if (cur_node == pos){
+			return true;
+		}
+		cur_node = cur_node->next;
+	}
 	return false;
 }
 
@@ -48,8 +60,76 @@ static bool hasCycle(struct Node *head)
 
 static struct Node* mergeLists(struct Node* list1, struct Node* list2)
 {
+
+	if (list1 == NULL && list2 == NULL){
+		return NULL;
+	}else if (list1 == NULL){
+		return list2;
+	}else if (list2 == NULL){
+		return list1;
+	}
+
+	Node* new_node = NULL;
+	Node* cur_pos;
+	Node* cur_pos_l1 = list1;
+	Node* cur_pos_l2 = list2;
+	
 	//Placeholder return statement
-	return NULL;
+	#ifdef DEBUG
+	printf("list1: ");
+	printList(list1);
+	printf("list2: ");
+	printList(list2);
+	#endif
+
+	while (cur_pos_l1 != NULL && cur_pos_l2 != NULL){
+		if (cur_pos_l1->data < cur_pos_l2->data){
+			if (new_node == NULL){
+				new_node = createNode(list1->data);
+				cur_pos = new_node;
+			}else{
+
+				cur_pos->next = cur_pos_l1;
+				cur_pos = cur_pos->next;
+			}
+			cur_pos_l1 = cur_pos_l1->next;
+		}else
+		{
+			if (new_node == NULL){
+				new_node = createNode(list2->data);
+				cur_pos = new_node;
+			}else{
+				cur_pos->next = cur_pos_l2;
+				cur_pos = cur_pos->next;
+			}
+			cur_pos_l2 = cur_pos_l2->next;
+
+		}
+		#ifdef DEBUG
+		printf("current merge status: ");
+		printList(new_node);
+		printf("curlist1: ");
+		printList(cur_pos_l1);
+		printf("curlist2: ");
+		printList(cur_pos_l2);
+		#endif
+	}
+
+	if (cur_pos_l1 == NULL){
+		//l2 pushed onto new_node
+		while (cur_pos_l2 != NULL){
+			cur_pos->next = cur_pos_l2;
+			cur_pos = cur_pos->next;
+			cur_pos_l2 = cur_pos_l2->next;
+		}
+	}else{
+		while (cur_pos_l1 != NULL){
+			cur_pos->next = cur_pos_l1;
+			cur_pos = cur_pos->next;
+			cur_pos_l1 = cur_pos_l1->next;
+		}
+	}
+	return new_node;
 }
 
 #endif
