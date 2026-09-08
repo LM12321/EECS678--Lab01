@@ -122,7 +122,6 @@ static struct Node* insertAtEnd(struct Node* head, int data)
 
     // Return the head of the list.
     // Your Code Here
-
     return head;
 }
 
